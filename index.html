@@ -33,13 +33,13 @@
         <div class="info" id="u-name">کارمەند: بار دەبێت...</div>
         <div class="info" id="p-date">کات: --:--</div>
         
-        <div id="r-box" class="range-box">لە وەسڵی: -- <br> بۆ وەسڵی: --</div>
+        <div id="r-box" class="range-box">لە پسووڵە: -- <br> بۆ پسووڵە: --</div>
         
         <div class="line"></div>
         <div class="info" id="t-count">کۆی پسووڵە: 0</div>
         <div class="total-box" id="t-money">0 د.ع</div>
         
-        <p style="font-size: 10px; margin-top: 15px;">سیستەمی کارگێڕی ئاردوئی ئێکسڵ</p>
+        <p style="font-size: 10px; margin-top: 15px;">واژۆی كارمه‌ند</p>
     </div>
 
     <script>
@@ -90,7 +90,7 @@
                 });
 
                 if (count > 0) {
-                    document.getElementById('r-box').innerHTML = `لە وەسڵی: ${Math.min(...nos)} <br> بۆ وەسڵی: ${Math.max(...nos)}`;
+                    document.getElementById('r-box').innerHTML = `لە پسووڵە: ${Math.min(...nos)} <br> بۆ پسووڵە: ${Math.max(...nos)}`;
                     document.getElementById('t-count').innerText = "کۆی پسووڵە: " + count;
                     document.getElementById('t-money').innerText = total.toLocaleString() + " د.ع";
                 } else {
