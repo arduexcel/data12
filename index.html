@@ -6,14 +6,31 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <style>
+        /* لێرە دەتوانیت قەبارەکان بە ئارەزووی خۆت بگۆڕیت */
+        :root {
+            --header-title: 20px;    /* قەبارەی ناوی تێرمناڵ */
+            --sub-title: 18px;       /* قەبارەی وشەی ڕاپۆرتی کۆتایی */
+            --info-text: 19px;       /* قەبارەی ناوی کارمەند و کات */
+            --range-text: 19px;      /* قەبارەی ژمارەی پسووڵەکان */
+            --total-count-text: 25px; /* قەبارەی نوسینی کۆی پسووڵە */
+            --money-text: 22px;      /* قەبارەی بڕی پارەکە */
+            --footer-text: 20px;     /* قەبارەی واژۆی کارمەند */
+        }
+
         body { font-family: 'Segoe UI', Tahoma, sans-serif; text-align: center; direction: rtl; margin: 0; padding: 10px; }
         .report-card { width: 58mm; margin: auto; padding: 5px; border: 1px solid #eee; }
-        .header img { width: 60px; margin-bottom: 5px; }
-        .header h2 { font-size: 16px; margin: 5px 0; }
+        .header img { width: 110px; margin-bottom: 5px; }
+        
+        /* بەکارهێنانی قەبارەکان لەم بەشانەی خوارەوە */
+        .header h2 { font-size: var(--header-title); margin: 5px 0; }
+        .header h3 { font-size: var(--sub-title); margin: 0; }
+        .info { text-align: right; font-size: var(--info-text); margin: 10px 0; }
+        .range-box { border: 1px solid black; padding: 10px; margin: 10px 0; font-size: var(--range-text); font-weight: bold; }
+        #t-count { font-size: var(--total-count-text); }
+        #t-money { font-size: var(--money-text); }
+        .footer-sig { font-size: var(--footer-text); margin-top: 15px; }
+
         .line { border-top: 1px dashed black; margin: 10px 0; }
-        .info { text-align: right; font-size: 13px; margin: 5px 0; }
-        .range-box { border: 1px solid black; padding: 10px; margin: 10px 0; font-size: 16px; font-weight: bold; }
-        .total-box { background: #000; color: #fff; padding: 10px; margin-top: 10px; font-size: 20px; }
         button { background: #27ae60; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; margin-bottom: 10px; border-radius: 5px; font-family: inherit; }
         @media print { button { display: none; } .report-card { border: none; width: 100%; } }
     </style>
@@ -26,11 +43,11 @@
         <div class="header">
             <img src="https://arduexcel.github.io/img/ms-icon-144x144.png">
             <h2>تێرمناڵی سه‌ره‌كی سلێمانی</h2>
-            <h3 style="margin:0; font-size:14px;">ڕاپۆرتی کۆتایی </h3>
+            <h3>ڕاپۆرتی کۆتایی</h3>
         </div>
         
         <div class="line"></div>
-        <div class="info"style="font-size: 10px;  id="u-name">کارمەند: بار دەبێت...</div>
+        <div class="info" id="u-name">کارمەند: بار دەبێت...</div>
         <div class="info" id="p-date">کات: --:--</div>
         
         <div id="r-box" class="range-box">لە پسووڵە: -- <br> بۆ پسووڵە: --</div>
@@ -39,11 +56,10 @@
         <div class="info" id="t-count">کۆی پسووڵە: 0</div>
         <div class="range-box" id="t-money">0 د.ع</div>
         
-        <p style="font-size: 10px; margin-top: 15px;">واژۆی كارمه‌ند</p>
+        <p class="footer-sig">واژۆی كارمه‌ند</p>
     </div>
 
     <script>
-        // هەمان کۆنفیکی سیستمە ئەسڵییەکەت
         const config = { 
             apiKey: "AIzaSyCuUstd-6d0E-EbmQipv2mWk-bA55ajpQ0", 
             authDomain: "car-system-4594d.firebaseapp.com", 
@@ -54,11 +70,9 @@
         const db = firebase.firestore();
 
         async function initReport() {
-            // 1. هەوڵدان بۆ گرتنی ناو لە لینک
             const params = new URLSearchParams(window.location.search);
             let user = params.get('user');
 
-            // 2. ئەگەر لە لینک نەبوو، لە localStorage بیخوێنەرەوە
             if (!user) {
                 user = localStorage.getItem("terminalUser");
             }
@@ -71,7 +85,6 @@
             document.getElementById('u-name').innerText = "کارمەند: " + user;
             document.getElementById('p-date').innerText = "کات: " + new Date().toLocaleString('en-GB');
 
-            // وەرگرتنی بەروار ڕێک وەک شێوازی ناو سیستمەکەت
             const today = new Date().toLocaleDateString('en-CA');
 
             try {
