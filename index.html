@@ -6,22 +6,20 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <style>
-        /* لێرە دەتوانیت قەبارەکان بە ئارەزووی خۆت بگۆڕیت */
         :root {
-            --header-title: 20px;    /* قەبارەی ناوی تێرمناڵ */
-            --sub-title: 18px;       /* قەبارەی وشەی ڕاپۆرتی کۆتایی */
-            --info-text: 19px;       /* قەبارەی ناوی کارمەند و کات */
-            --range-text: 19px;      /* قەبارەی ژمارەی پسووڵەکان */
-            --total-count-text: 25px; /* قەبارەی نوسینی کۆی پسووڵە */
-            --money-text: 22px;      /* قەبارەی بڕی پارەکە */
-            --footer-text: 20px;     /* قەبارەی واژۆی کارمەند */
+            --header-title: 20px;
+            --sub-title: 18px;
+            --info-text: 19px;
+            --range-text: 19px;
+            --total-count-text: 25px;
+            --money-text: 22px;
+            --footer-text: 20px;
         }
 
         body { font-family: 'Segoe UI', Tahoma, sans-serif; text-align: center; direction: rtl; margin: 0; padding: 10px; }
         .report-card { width: 58mm; margin: auto; padding: 5px; border: 1px solid #eee; }
         .header img { width: 110px; margin-bottom: 5px; }
         
-        /* بەکارهێنانی قەبارەکان لەم بەشانەی خوارەوە */
         .header h2 { font-size: var(--header-title); margin: 5px 0; }
         .header h3 { font-size: var(--sub-title); margin: 0; }
         .info { text-align: right; font-size: var(--info-text); margin: 10px 0; }
@@ -29,22 +27,54 @@
         #t-count { font-size: var(--total-count-text); }
         #t-money { font-size: var(--money-text); }
         .footer-sig { font-size: var(--footer-text); margin-top: 15px; }
-
         .line { border-top: 1px dashed black; margin: 10px 0; }
-        button { background: #27ae60; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; margin-bottom: 10px; border-radius: 5px; font-family: inherit; }
-        @media print { button { display: none; } .report-card { border: none; width: 100%; } }
+
+        /* ستایلی نوێی دوگمەکە */
+        .print-btn-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .print-button {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            width: 220px; /* دەتوانی ئەم قەبارەیە بگۆڕیت */
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .print-button:hover {
+            background: #219150;
+        }
+
+        @media print { 
+            .print-btn-container { display: none; } 
+            .report-card { border: none; width: 100%; } 
+        }
     </style>
 </head>
 <body>
 
- <div style="display: flex; justify-content: center;">
-    <button class="print-button" onclick="window.print()">
-        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
-        </svg>
-        پرنتکردنی ڕاپۆرت
-    </button>
-</div>
+    <div class="print-btn-container">
+        <button class="print-button" onclick="window.print()">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+            </svg>
+            پرنتکردنی ڕاپۆرت
+        </button>
+    </div>
 
     <div class="report-card">
         <div class="header">
@@ -123,9 +153,9 @@
         }
 
         window.onload = initReport;
-window.onafterprint = function() {
-    window.close();
-};
+        window.onafterprint = function() {
+            window.close();
+        };
     </script>
 </body>
 </html>
