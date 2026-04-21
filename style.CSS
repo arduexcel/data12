@@ -1,26 +1,24 @@
+/* ستایلی نوێ بۆ دوگمەی پرنت */
 .print-button {
-    background-color: #2d3e50; /* ڕەنگێکی شینی تۆخی فەرمی */
+    background: #27ae60;
     color: white;
-    padding: 10px 25px;
-    font-size: 16px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-flex;
+    padding: 15px 30px;    /* بەرزی و پانی ناوەوەی دوگمەکە */
+    width: 200px;          /* پانی دوگمەکە - دەتوانی بیگۆڕیت */
+    margin: 20px auto;     /* بۆ هێنانە ناوەڕاست و دوورکەوتنەوە لە سەرەوە */
+    display: flex;         /* بۆ ڕێکخستنی ئایکۆن و نووسینەکە */
     align-items: center;
-    gap: 8px;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    justify-content: center;
+    gap: 10px;             /* مەودای نێوان ئایکۆن و دەقەکە */
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 18px;       /* قەبارەی فۆنتی ناو دوگمەکە */
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background 0.3s;
 }
 
 .print-button:hover {
-    background-color: #1a252f; /* کەمێک تۆختر دەبێتەوە کاتێک ماوس دەچێتە سەری */
-}
-
-/* ئەم بەشە وادەکات دوگمەکە لە کاتی چاپکردنەکە خۆیدا دەرنەکەوێت */
-@media print {
-    .print-button {
-        display: none;
-    }
+    background: #219150;
 }
