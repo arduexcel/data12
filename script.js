@@ -7,8 +7,8 @@ function printFinalReport() {
 
     window.onload = initReport;
 
-    // ئەم بەشە نوێیە بۆ داخستنەوەی وێبەکە دوای پرنت
-    window.onafterprint = function() {
-        window.close();
-    };
+// ئەم بەشە دەستکاری کراوە بۆ گەڕانەوە بۆ دواوە
+window.onafterprint = function() {
+    window.history.back();
+};
 </script>
