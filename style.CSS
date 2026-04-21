@@ -1,0 +1,26 @@
+.print-button {
+    background-color: #2d3e50; /* ڕەنگێکی شینی تۆخی فەرمی */
+    color: white;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.print-button:hover {
+    background-color: #1a252f; /* کەمێک تۆختر دەبێتەوە کاتێک ماوس دەچێتە سەری */
+}
+
+/* ئەم بەشە وادەکات دوگمەکە لە کاتی چاپکردنەکە خۆیدا دەرنەکەوێت */
+@media print {
+    .print-button {
+        display: none;
+    }
+}
